@@ -46,7 +46,8 @@ module.exports = function () {
 	  , appViewPaths = mano.appRoutes = create(null), uploadsMiddleware;
 
 	// Favicon
-	app.use(serveFavicon(resolve(root, 'public/favicon.ico')));
+	// TODO: Uncomment as soon as favicon is provided
+	// app.use(serveFavicon(resolve(root, 'public/favicon.ico')));
 
 	// Turn on response GZIP compression
 	app.use(compression());
