@@ -11,11 +11,13 @@ var deferred    = require('deferred')
   , root = resolve(__dirname, '..');
 
 deferred(
-	generateApp(root, 'users-admin'),
+	generateApp(root, 'business-process-submitted'),
 	generateApp(root, 'meta-admin'),
+	generateApp(root, 'public'),
 	generateApp(root, 'user'),
-	generateApp(root, 'business-process-submitted')
+	generateApp(root, 'users-admin')
 ).done(function () {
-	console.log("Following applications were generated: \"users-admin\", \"meta-admin\", \"user\" " +
-		"and \"business-process-submitted\".\n\nFollow README.md for next steps");
+	console.log("Following applications were generated: \"public\", \"users-admin\", " +
+		"\"meta-admin\", \"user\" and \"business-process-submitted\".\n\n" +
+		"Follow README.md for next steps");
 });
