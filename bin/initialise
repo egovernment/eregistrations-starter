@@ -16,6 +16,6 @@ deferred(
 	generateApp(root, 'user'),
 	generateApp(root, 'business-process-submitted')
 ).done(function () {
-	console.log("\"users-admin\", \"meta-admin\", \"user\" and \"business-process-submitted\" " +
-		" applications were generated.\n\n Follow README.md for next steps");
+	console.log("Following applications were generated: \"users-admin\", \"meta-admin\", \"user\" " +
+		"and \"business-process-submitted\".\n\nFollow README.md for next steps");
 });
