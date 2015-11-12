@@ -8,7 +8,8 @@ var mano       = require('mano')
   , dbServer   = require('../server/db/persistent')
   , db         = dbServer.db;
 
-mano.i18n.locale = tryRequire(resolve(__dirname, '../i18n'));
+require('./_');
+
 require('../model/user/roles');
 require('dbjs-ext/string/string-line/password')(db);
 require('eregistrations/scripts/create-users-admin')(dbServer);
