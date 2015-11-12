@@ -157,7 +157,7 @@ module.exports = memoize(function (appId) {
 	}
 	if (roleName === 'statistics') {
 		// Statitistics role (TODO)
-		return fragment;
+		return fragment.flush();
 	}
 	if (roleName === 'usersAdmin') {
 		// Users admin role
