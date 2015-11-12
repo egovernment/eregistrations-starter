@@ -6,6 +6,7 @@ model-tags.generated.js
 Thumbs.db
 /.cloudfront
 /env.json
+/env.js
 /i18n-scan-map.generated.json
 /apps-common/client/env.json
 /.idea
