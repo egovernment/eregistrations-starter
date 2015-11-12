@@ -16,6 +16,6 @@ module.exports = function (appPath) {
 		// 2. Script that generates bundled JS files
 		generateAppClientProgramScript(appPath),
 		// 3. Script that generates index html
-		generateAppHtmlIndexScript(appPath, { title: 'elomas.gob.ar' })
+		generateAppHtmlIndexScript(appPath)
 	);
 };
