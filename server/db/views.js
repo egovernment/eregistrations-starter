@@ -1,6 +1,9 @@
 // Populate predefined view objects with data
 // (it's about providing (reactive way) state of first pages on business processes lists)
 
+// See example configurations at:
+// https://github.com/egovernment/eregistrations-lomas/blob/master/server/db/views.js
+
 'use strict';
 
 var toNaturalNumber   = require('es5-ext/number/to-pos-integer')
