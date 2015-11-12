@@ -3,7 +3,7 @@
 var punt  = require('punt')
   , debug = require('debug-ext')('start-service')
   , env   = require('../env')
-  , db    = require('mano').db;
+  , db    = require('../db');
 
 if (env.ipcPort) {
 	punt.bind('0.0.0.0:' + env.ipcPort).on('message', function (type, data) {

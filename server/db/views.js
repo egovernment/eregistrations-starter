@@ -9,7 +9,7 @@
 var toNaturalNumber   = require('es5-ext/number/to-pos-integer')
   , getCompare        = require('eregistrations/utils/get-compare')
   , serialize         = require('eregistrations/utils/db-view/serialize')
-  , db                = require('../../model/base')
+  , db                = require('../../db')
   , users             = require('eregistrations/users/index.js')
   , getUserOrderIndex = require('eregistrations/users/get-default-order-index')
   , envItemsPerPage   = toNaturalNumber(require('../../env').objectsListItemsPerPage)
