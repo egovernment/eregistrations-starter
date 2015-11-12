@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+// Scans project for i18n messages
+
+'use strict';
+
+Error.stackTraceLimit = Infinity;
+
+require('../scripts/i18n-scan')().done();

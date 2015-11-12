@@ -1,0 +1,242 @@
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="loginLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header text-white bg-red">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="loginLabel">${ _("Log in") }</h4>
+			</div>
+			<div class="modal-body">
+				<form id="login-form" method="post" action="/login/">
+					<div class="form-group">
+						<label for="email">${ _("Email") }</label>
+						<input type="email" class="form-control" required name="email" placeholder="${ _("Email") }" />
+					</div>
+					<div class="form-group">
+						<label for="password">${ _("Password") }</label>
+						<input type="password" class="form-control" required name="password" placeholder="${ _("Password") }"
+							pattern="${ passwordPattern }" />
+						<span class="error-message"></span>
+					</div>
+					<div class="form-group">
+						<input type="submit" value="${ _("Sign in") }" class="btn btn-default btn-sm">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<small class="text-left">${ _("No account?") } <a href="" data-dismiss="modal" data-toggle="modal" data-target="#register">${ _("Create an account") }</a><span> | </span>
+			<a href="" data-dismiss="modal" data-toggle="modal" data-target="#reset-password">${ _("Reset password") }</a></small>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Register modal dialog -->
+<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header text-white bg-red">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="registerLabel">${ _("Create your account") }</h4>
+			</div>
+			<div class="modal-body">
+				<form id="register-form" method="post" action="/register/">
+					<div class="form-group">
+						<label for="User#/firstName">${ _("First name") }</label>
+						<input name="User#/firstName" class="form-control" type="text" placeholder="${ _("First name") }">
+						<span class="error-message"></span>
+					</div>
+					<div class="form-group">
+						<label for="User#/lastName">${ _("Last name") }</label>
+						<input name="User#/lastName" class="form-control" type="text" placeholder="${ _("Last name") }">
+						<span class="error-message"></span>
+					</div>
+					<div class="form-group">
+						<label for="User#/email">${ _("Email") }</label>
+						<input name="User#/email" class="form-control" type="email" placeholder="${ _("Email") }">
+						<span class="error-message"></span>
+					</div>
+					<div class="form-group">
+						<label for="User#/password">${ _("Password") }</label>
+						<input name="User#/password" class="form-control" type="password" placeholder="${ _("Password") }"
+							pattern="${ passwordPattern }" />
+						<span class="error-message"></span>
+					</div>
+					<div class="form-group">
+						<label for="password-repeat">${ _("Repeat password") }</label>
+						<input type="password" class="form-control" name="password-repeat" required placeholder="Repeat password"
+							pattern="${ passwordPattern }" />
+						<span class="error-message"></span>
+					</div>
+					<div class="form-group">
+						<label>
+							<input type="checkbox" name="User#/isProfessional" value="1" data-type="boolean" />
+							<input type="hidden" name="User#/isProfessional" value="0" data-type="boolean" />
+							${ _("I am a notary, lawyer, auditor or accountant") }
+						</label>
+						<span class="error-message"></span>
+					</div>
+					<!--<div class="form-group">
+						<input name="isManager" class="" type="checkbox">
+						<label>${ _("Manager account") }</label>
+						<span class="hint">${ _("Manager account allows you to create multiple requests on behalf of others.") }</span>
+					</div>-->
+					<div class="form-group">
+						<input type="submit" value="${ _("Create account") }" class="btn btn-primary btn-sm">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<small class="text-left">${ _("Already has account?") } <a href="" data-dismiss="modal" data-toggle="modal" data-target="#login">${ _("Log in") }</a><span> | </span>
+			<a data-dismiss="modal" href="/reset-password"> ${ _("Reset password") }</a></small>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Reset password modal dialog -->
+<div class="modal fade" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="resetLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header text-white bg-red">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="resetLabel">${ _("Reset password") }</h4>
+			</div>
+			<div class="modal-body">
+				<form id="reset-password-form" method="post" action="/request-reset-password/">
+					<p class="success-message"></p>
+					<div class="form-group">
+						<label for="email">${ _("Email") }</label>
+						<input type="email" required name="email" placeholder="${ _("Email") }" class="form-control">
+					</div>
+					<div class="form-group">
+						<input type="submit" value="${ _("Reset") }" class="btn btn-default btn-sm">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<nav id="mainnav" class="navbar navbar-transparent navbar-large navbar-fixed-top">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-5 col-md-6">
+				<div class="navbar-header">
+					<button id="topMenuButton" type="button" class="navbar-toggle collapsed">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="nclo1 icon-bar"></span>
+						<span class="nclo2 icon-bar"></span>
+						<span class="nclo3 icon-bar"></span>
+					</button>
+
+					<a class="logo" href="/">
+						<img src="${ stRoot }img/merged-logo-pmo.png" />
+					</a>
+				</div>
+			</div>
+			
+			<div class="col-sm-7 col-md-6">
+				<div class="collapse navbar-collapse" id="topnav">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/help"><span class="navbar-link">Help</span></a></li>
+						<li><a href="/about-us"><span class="navbar-link">About us</span></a></li>
+						<li><a href="/contact"><span class="navbar-link">Contact</span></a></li>						
+						<li><a href="" data-toggle="modal" data-target="#login"><span class="navbar-btn btn btn-default btn-sm">${ _("Log in") }</span></a></li>
+						<li><a href="" data-toggle="modal" data-target="#register"><span class="navbar-btn btn btn-primary btn-sm">${ _("Create your account") }</span></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container" id="sectionNav"></div>
+</nav><!-- end navbar top -->
+
+<!-- Next/prev navigation -->
+<a id="navPrev" href="#" class="nav-prev transition hidden hidden-xs" data-toggle="tooltip" data-placement="right" title=""><i class="fa fa-chevron-left"></i></a>
+<a id="navNext" href="#" class="nav-next transition hidden hidden-xs" data-toggle="tooltip" data-placement="left" title=""><i class="fa fa-chevron-right"></i></a>
+
+<!-- Black curtain behind modal dialoges -->
+<div class="modal-courtain"></div>
+
+<!-- Main container -->
+<main id="content">
+		<!-- To be filled by child views -->
+</main>
+
+<div class="bottom">
+	<div class="institutions-logos">
+		<a href="http://www.brela-tz.org/" target="_blank">
+			<img src="${ stRoot }img/logos/brela3.png" alt="brela" class="logoss">
+		</a>
+		<a href="http://www.tra.go.tz/" target="_blank">
+			<img src="${ stRoot }img/logos/tra.png" alt="tra" class="logoss">
+		</a>
+		<a href="https://www.ssra.go.tz/" target="_blank">
+			<img src="${ stRoot }img/logos/logo-ssra2.png" alt="ssra" class="logoss">
+		</a>
+		<a href="https://tic.co.tz/" target="_blank">
+			<img src="${ stRoot }img/logos/tic-logo1.png" alt="ssra" class="logoss">
+		</a>
+		<a href="http://ega.go.tz/" target="_blank">
+			<img src="${ stRoot }img/logos/logo-egov.jpg" alt="eGovernment Agency" class="egov logoss">
+		</a>
+	</div>
+
+	<div class="security-funds-logos pt-md">
+		<div>Participating social security providers:</div>
+		<a href="http://www.gepf.or.tz" target="_blank">
+			<img src="${ stRoot }img/logos/gepf.png" alt="Government Employees Provident Fund (GEPF)">
+		</a>
+		<a href="http://www.lapftz.org" target="_blank">
+			<img src="${ stRoot }img/logos/logolapf.png" alt="Local Authorities Pension Fund (LAPF)">
+		</a>
+		<a href="http://www.ppftz.org/" target="_blank">
+			<img src="${ stRoot }img/logos/ppf.png" alt="Parastatal Pensions Fund(PPFTZ)">
+		</a>
+		<a href="http://www.nssf.or.tz" target="_blank">
+			<img src="${ stRoot }img/logos/nssf-logo-sw.png" alt="National Social Security Fund (NSSF)">
+		</a>
+		<a href="http://www.nhif.or.tz" target="_blank">
+			<img src="${ stRoot }img/logos/nhif.png" alt="National Health Insurance Fund">
+		</a>
+		<a href="http://pspf-tz.org" target="_blank">
+			<img src="${ stRoot }img/logos/pspf-logo.png" alt="Public Service Pension Fund (PSPF)">
+		</a>
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<p class="text-center">Implemented in partnership with <a href="http://www.tic.co.tz/" target="_blank">Tanzania Investment Centre</a>, the <a href="http://www.tz.undp.org/tanzania/en/home.html" target="_blank">UNDP Tanzania</a> and <a href="http://unctad.org/en/Pages/Home.aspx" target="_blank">UNCTAD</a></p>
+	</footer>
+</div>
+<script>
+jQuery.noConflict();
+
+jQuery( document ).ready(function( $ ) {
+
+	$('[data-toggle="tooltip"]').tooltip();
+
+	$('#topMenuButton').click(function(e) {
+		if($(this).hasClass('opened')) {
+			$(this).removeClass('opened');
+		}else{
+			$(this).addClass('opened');
+		}
+		$('#topnav').collapse('toggle');
+	});
+
+	$('#topnav li a').click(function(e) {
+		if($('#topnav').hasClass('in')) {
+			if($('#topMenuButton').hasClass('opened')) {
+				$('#topMenuButton').removeClass('opened');
+			}else{
+				$('#topMenuButton').addClass('opened');
+			}
+			$('#topnav').collapse('toggle');
+		}
+	});
+});
+</script>

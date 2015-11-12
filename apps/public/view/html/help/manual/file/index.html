@@ -1,0 +1,124 @@
+<div class="row">
+	<div class="col-sm-3">
+		<div id="sidebar-left" class="sidebar hidden-xs">
+			<nav id="solicitudeSideNav" class="sidenav mgb-lg">
+				<!-- <nav class="sidenav mgb-lg"> -->
+				<ul class="nav">
+					<li id="sidenav-guide">
+						<a href="/help/user-manual/file/guide">
+							<span class="fa fa-book"></span>
+							<span>Guide</span>
+						</a>
+						<div id="guidespy">
+							<ul class="nav">
+								<li class="active"><a href="#presentacion">Presentation</a></li>
+								<li><a href="#registrations">Your business registrations</a></li>
+								<li><a href="#requirements">Requirements</a></li>
+								<li><a href="#costs">Costs</a></li>
+							</ul>
+						</div>
+					</li>
+					<li id="sidenav-form">
+						<a href="/help/user-manual/file/form">
+							<span class="fa fa-tasks"></span>
+							<span>Form</span>
+						</a>
+						<div id="formspy">
+							<ul class="nav">
+								<li class="active"><a href="#proposed-company-name">Proposed company name</a></li>
+								<li><a href="#business-premises">Business premises</a></li>
+								<li><a href="#business-activity">Business activity</a></li>
+								<li><a href="#company-secretary">Company secretary</a></li>
+								<li><a href="#directors">Directors & non-directors owner / partners</a></li>
+								<li><a href="#estimate">Estimate of income tax</a></li>
+								<li><a href="#employer-information">Employer information</a></li>
+								<li><a href="#petitioner">Information on the petitioner</a></li>
+							</ul>
+						</div>
+					</li>
+					<li id="sidenav-documents"><a href="/help/user-manual/file/documents">
+						<span class="fa fa-file-text"></span>
+						<span>Documents</span>
+					</a></li>
+				</ul>
+			<!-- </nav> -->
+			</nav>
+
+			<a target="_blank" href="${ stRoot }pdf/tiw-manual.pdf" class="btn btn-sm btn-default hidden-xs" title="Imprimir el manual">
+				<span class="fa fa-print"></span>
+				<span>Print manual</span>
+			</a>
+		</div>
+
+		<div class="sidebar hidden-sm hidden-md hidden-lg">
+			<nav id="solicitudeSideNav" class="sidenav mgb-lg">
+				<ul class="nav">
+					<li id="sidenav-guide-m">
+						<a href="/help/user-manual/file/guide">
+							<span class="fa fa-book"></span>
+							<span>Guide</span>
+						</a>
+						<ul class="nav">
+							<li class="active"><a href="#presentacion">Presentation</a></li>
+							<li><a href="#registrations">Your business registrations</a></li>
+							<li><a href="#requirements">Requirements</a></li>
+							<li><a href="#costs">Costs</a></li>
+						</ul>
+					</li>
+					<li id="sidenav-form-m">
+						<a href="/help/user-manual/file/form">
+							<span class="fa fa-tasks"></span>
+							<span>Form</span>
+						</a>
+						<ul class="nav">
+							<li class="active"><a href="#proposed-company-name">Proposed company name</a></li>
+							<li><a href="#business-premises">Business premises</a></li>
+							<li><a href="#business-activity">Business activity</a></li>
+							<li><a href="#company-secretary">Company secretary</a></li>
+							<li><a href="#directors">Directors & non-directors owner / partners</a></li>
+							<li><a href="#estimate">Estimate of income tax</a></li>
+							<li><a href="#employer-information">Employer information</a></li>
+							<li><a href="#petitioner">Information on the petitioner</a></li>
+						</ul>
+					</li>
+					<li id="sidenav-documents-m"><a href="/help/user-manual/file/documents">
+						<span class="fa fa-file-text"></span>
+						<span>Documents</span>
+					</a></li>
+				</ul>
+			</nav>
+
+			<a target="_blank" href="${ stRoot }pdf/tiw-manual.pdf" class="btn btn-sm btn-default hidden-xs" title="Imprimir el manual">
+				<span class="fa fa-print"></span>
+				<span>Print manual</span>
+			</a>
+		</div>
+	</div>
+
+	<div class="col-sm-9 mgb-md">
+		<div id="expContent" class="main-container-well">
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+jQuery( document ).ready(function( $ ) {
+	$('#sidebar-left').affix({
+		offset: {
+			top: 30
+		}
+	});
+
+	$('body').scrollspy({
+		target: '.nav-spy',
+		offset: 250
+	});
+
+	$('.nav-spy .nav li > a').click(function(){
+		$('html, body').animate({
+			scrollTop: ($($(this).attr('href')).offset().top)-250
+		}, 1000);
+	});
+});
+</script>

@@ -1,0 +1,12 @@
+@root
+
+module
+
+tabs
+white
+indent 2
+maxlen 80
+
+ass
+nomen
+plusplus

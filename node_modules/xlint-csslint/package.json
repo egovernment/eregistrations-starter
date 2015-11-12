@@ -1,0 +1,29 @@
+{
+  "name": "xlint-csslint",
+  "version": "0.1.0",
+  "description": "CSSLint handler for XLint",
+  "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
+  "keywords": [
+    "csslint",
+    "lint",
+    "xlint",
+    "css",
+    "cli",
+    "console"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/xlint-csslint.git"
+  },
+  "dependencies": {
+    "csslint": "0.10.x",
+    "es5-ext": "~0.10.2"
+  },
+  "devDependencies": {
+    "tad": "0.2.x"
+  },
+  "scripts": {
+    "test": "node ./node_modules/tad/bin/tad"
+  },
+  "license": "MIT"
+}

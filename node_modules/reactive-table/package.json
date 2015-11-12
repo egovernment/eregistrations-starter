@@ -1,0 +1,35 @@
+{
+  "name": "reactive-table",
+  "version": "0.1.0",
+  "description": "Reactive table",
+  "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
+  "keywords": [
+    "html",
+    "dom",
+    "table",
+    "reactive"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/reactive-table.git"
+  },
+  "dependencies": {
+    "es5-ext": "^0.10.6",
+    "event-emitter": "^0.3.3",
+    "d": "^0.1.1",
+    "dom-ext": "git://github.com/medikoo/dom-ext.git",
+    "html-dom-ext": "git://github.com/medikoo/html-dom-ext.git",
+    "memoizee": "^0.3.8",
+    "observable-set": "git://github.com/medikoo/observable-set.git",
+    "timers-ext": "0.1"
+  },
+  "devDependencies": {
+    "xlint": "~0.2.1",
+    "xlint-jslint-medikoo": "~0.1.2"
+  },
+  "scripts": {
+    "lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
+    "lint-console": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --watch"
+  },
+  "license": "MIT"
+}

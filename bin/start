@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+
+'use strict';
+
+Error.stackTraceLimit = Infinity;
+
+if (!process.env.DEBUG) {
+	process.env.DEBUG = 'load,start-service,application-number,health,client,db-data-sync,' +
+		'html-renderer,auth,client-bundle,zip-archiver,db';
+}
+
+require('../server')();

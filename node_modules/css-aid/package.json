@@ -1,0 +1,29 @@
+{
+  "name": "css-aid",
+  "version": "0.1.0",
+  "description": "Basic standards focused CSS preprocessor",
+  "author": "Mariusz Nowak <medyk@medikoo.com> (http://www.medikoo.com/)",
+  "keywords": [
+    "css",
+    "preprocessor",
+    "less",
+    "sass",
+    "venorprefixes",
+    "flexbox",
+    "style"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/medikoo/d.git"
+  },
+  "dependencies": {
+    "es5-ext": "~0.10.4"
+  },
+  "devDependencies": {
+    "tad": "0.2.x"
+  },
+  "scripts": {
+    "test": "node node_modules/tad/bin/tad"
+  },
+  "license": "MIT"
+}

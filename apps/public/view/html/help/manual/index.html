@@ -1,0 +1,64 @@
+<div id="contentTopNav" class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<nav  class="navbar navbar-primary">
+				<div class="navbar-header">
+					<button id="buttonSubNav" type="button" class="navbar-toggle collapsed">
+						<span class="hidden-sm hidden-md hidden-lg pull-left">
+							<span id="resp-navsection-file" class="hidden">1. Create your file</span>
+							<span id="resp-navsection-payment" class="hidden">2. Payment</span>
+							<span id="resp-navsection-certificates" class="hidden">3. Retrieve your certificates</span>
+						</span>
+						<span class="fa fa-lg fa-caret-down pull-right"></span>
+					</button>
+				</div>
+
+				<div class="navbar-collapse collapse" id="subnav">
+					<ul class="nav navbar-nav">
+						<li id="navsection-file"><a href="/help/user-manual/file"><span class="">1. Create your file</span></a></li>
+						<li id="navsection-payment"><a href="/help/user-manual/payment"><span class="">2. Payment</span></a></li>
+						<li id="navsection-certificates"><a href="/help/user-manual/certificates"><span class="">3. Retrieve your certificates</span></a></li>
+						<!---->
+						<li class="sticky">
+							<a href="${ stRoot }demo/index.html">
+								<span><strong>DEMO:</strong> try now!</span>
+
+								<span class="fa-stack fa-lg hidden-xs">
+									<span class="fa fa-circle fa-stack-2x text-orange"></span>
+									<span class="fa fa-rocket fa-stack-1x"></span>
+								</span>
+
+								<span class="fa-stack hidden-sm hidden-md hidden-lg">
+									<span class="fa fa-circle fa-stack-2x text-orange"></span>
+									<span class="fa fa-rocket fa-stack-1x"></span>
+								</span>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+</div>
+
+<div id="sectionContent" class="container">
+</div>
+
+<script type="text/javascript">
+jQuery( document ).ready(function( $ ) {
+	$('#contentTopNav').affix({
+		offset: {
+			top: 30
+		}
+	});
+
+	$('#buttonSubNav').click(function(e) {
+		$('#subnav').collapse('toggle');
+	});
+
+	$('#subnav ul li a').click(function(e) {
+		$('#subnav').collapse('toggle');
+	});
+
+});
+</script>

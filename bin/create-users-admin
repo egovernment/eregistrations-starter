@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+'use strict';
+var mano       = require('mano')
+  , i18n       = require('i18n2')
+  , tryRequire = require('mano/lib/utils/try-require').bind(require)
+  , resolve    = require('path').resolve
+  , dbServer   = require('../server/db/persistent')
+  , db         = dbServer.db;
+
+mano.i18n.locale = tryRequire(resolve(__dirname, '../i18n'));
+require('../model/user/roles');
+require('dbjs-ext/string/string-line/password')(db);
+require('eregistrations/scripts/create-users-admin')(dbServer);

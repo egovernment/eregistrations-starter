@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var some      = require('es5-ext/object/some')
+  , resolve   = require('path').resolve
+  , isIgnored = require('fs2/is-ignored')
+  , lintPaths = require('xlint/lint-paths')
+  , getLinter = require('xlint/lib/get-linter')
+  , reporter  = require('xlint/lib/reporters/console-gjs')
+  , argv      = require('minimist')(process.argv.slice(2))
+
+  , linter   = getLinter(resolve(__dirname, '..',
+		'node_modules/xlint-jslint-medikoo/index.js'))
+
+  , options = { realFilename: resolve(argv.realFilePath), stream: false,
+		watch: false, color: false };
+
+isIgnored(['git', 'lint'], options.realFilename).done(function (result) {
+	if (result) return;
+	reporter = reporter(lintPaths(linter, argv._, options));
+	reporter.done();
+	process.on('exit', function (code) {
+		if (code) return;
+		reporter.done(function (data) {
+			process.exit(some(data, function (report) {
+				return report.length;
+			}) ? 1 : 0);
+		});
+	});
+});

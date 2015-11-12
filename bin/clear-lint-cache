@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+'use strict';
+
+var resolve = require('path').resolve
+  , readdir = require('fs2/readdir')
+  , unlink  = require('fs2/unlink')
+
+  , root = resolve(__dirname, '../');
+
+readdir(root, { type: { file: true }, depth: 2,
+	pattern: /[\/\\]\.lintcache$/ }).map(function (path) {
+	console.log("Remove:", path);
+	return unlink(resolve(root, path));
+}).done(function () { console.log("All done"); });

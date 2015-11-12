@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+Error.stackTraceLimit = Infinity;
+
+require('../scripts/adapt-apps')().done();

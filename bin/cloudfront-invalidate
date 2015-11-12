@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+'use strict';
+
+Error.stackTraceLimit = Infinity;
+
+// Prevent EMFILE errors
+require('fs2/descriptors-handler')();
+
+require('../scripts/cloudfront-invalidate')().done();

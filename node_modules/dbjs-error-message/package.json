@@ -1,0 +1,31 @@
+{
+  "name": "dbjs-error-message",
+  "version": "0.0.0",
+  "description": "dbjs error messages handling",
+  "author": "Kamil Gruca <gruca.kamil@gmail.com>",
+  "keywords": [
+    "dbjs",
+    "error",
+		"message"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kamsi/dbjs-error-message"
+  },
+  "dependencies": {
+		"d": "git://github.com/medikoo/d.git",
+		"dbjs": "git://github.com/medikoo/dbjs.git",
+    "es5-ext": "git://github.com/medikoo/es5-ext",
+		"es6-template-strings": "git://github.com/medikoo/es6-template-strings.git"
+  },
+  "devDependencies": {
+		"xlint": "~0.2.1",
+		"xlint-jslint-medikoo": "0.1.x",
+    "tad": "0.2.x"
+  },
+  "scripts": {
+		"lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
+    "test": "node node_modules/tad/bin/tad"
+  },
+  "license": "MIT"
+}
