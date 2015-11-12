@@ -8,14 +8,15 @@ var deferred    = require('deferred')
   , generateApp = require('eregistrations/scripts/generate-app')
   , resolve     = require('path').resolve
 
-  , root = resolve(__dirname, '..');
+  , root = resolve(__dirname, '..')
+  , opts = { appFilesOnly: true };
 
 deferred(
-	generateApp(root, 'business-process-submitted'),
-	generateApp(root, 'meta-admin'),
-	generateApp(root, 'public'),
-	generateApp(root, 'user'),
-	generateApp(root, 'users-admin')
+	generateApp(root, 'business-process-submitted', opts),
+	generateApp(root, 'meta-admin', opts),
+	generateApp(root, 'public', opts),
+	generateApp(root, 'user', opts),
+	generateApp(root, 'users-admin', opts)
 ).done(function () {
 	console.log("Following applications were generated: \"public\", \"users-admin\", " +
 		"\"meta-admin\", \"user\" and \"business-process-submitted\".\n\n" +
