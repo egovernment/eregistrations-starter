@@ -4,7 +4,7 @@ var assign       = require('es5-ext/object/assign')
   , copy         = require('es5-ext/object/copy')
   , primitiveSet = require('es5-ext/object/primitive-set')
   , resolve      = require('path').resolve
-  , db           = require('mano').db
+  , db           = require('../../db')
   , env          = require('../../env')
 
   , driver;

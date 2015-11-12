@@ -2,7 +2,7 @@
 
 'use strict';
 
-var db = module.exports = require('../model/base');
+var db = module.exports = require('../db');
 
 require('dbjs-ext/string/string-line/password')(db);
 
