@@ -4,7 +4,7 @@ var isReadOnlyRender = require('mano/client/utils/is-read-only-render');
 
 module.exports = exports = require('eregistrations/view/base');
 
-exports.title = "TIW";
+exports.title = "CHANGE ME";
 
 exports.head = function () {
 	meta({ name: 'viewport', content: 'width=device-width' });
@@ -33,5 +33,5 @@ exports.head = function () {
 };
 
 exports._logo = function () {
-	return img({ src: '/img/merged-logo-pmo.png' });
+	return img({ src: '/img/logo.png' });
 };
