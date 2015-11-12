@@ -10,7 +10,7 @@ var assign         = require('es5-ext/object/assign')
 AbstractError = function AbstractError(message/*, code, ext*/) {
 	var ext, code;
 	if (!(this instanceof AbstractError)) {
-		return new AbstractError(message, code, arguments[2]);
+		return new AbstractError(message, arguments[1], arguments[2]);
 	}
 	code = arguments[1];
 	ext = arguments[2];
