@@ -1,0 +1,21 @@
+#!/usr/bin/env node
+
+'use strict';
+
+Error.stackTraceLimit = Infinity;
+
+var deferred    = require('deferred')
+  , generateApp = require('eregistrations/scripts/generate-app')
+  , resolve     = require('path').resolve
+
+  , root = resolve(__dirname, '..');
+
+deferred(
+	generateApp(root, 'users-admin'),
+	generateApp(root, 'meta-admin'),
+	generateApp(root, 'user'),
+	generateApp(root, 'business-process-submitted')
+).done(function () {
+	console.log("\"users-admin\", \"meta-admin\", \"user\" and \"business-process-submitted\" " +
+		" applications were generated.\n\n Follow README.md for next steps");
+});
