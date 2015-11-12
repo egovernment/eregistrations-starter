@@ -3,7 +3,7 @@
 var assign      = require('es5-ext/object/assign')
   , customError = require('es5-ext/error/custom')
   , mano        = require('mano')
-  , _           = require('../../../_').bind("Public")
+  , _           = require('../../../i18n').bind("Public")
 
   , registerSubmit;
 

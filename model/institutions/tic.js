@@ -1,6 +1,6 @@
 'use strict';
 
-var _ = require('../../_').bind('Model: Institutions')
+var _ = require('../../i18n').bind('Model: Institutions')
   , db = require('../base');
 
 module.exports = require('eregistrations/model/institution')(db).newNamed('tic', {
