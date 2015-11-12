@@ -5,8 +5,9 @@
 Error.stackTraceLimit = Infinity;
 
 if (!process.env.DEBUG) {
-	process.env.DEBUG = 'load,start-service,application-number,health,client,db-data-sync,' +
-		'html-renderer,auth,client-bundle,zip-archiver,db';
+	process.env.DEBUG = 'application-number,auth,clean-demo-users,client,client-bundle,db,' +
+		'db-data-sync,health,html-renderer,is-submitted-lock-trigger,load,start-service,zip-archiver';
+
 }
 
 require('../server')();
