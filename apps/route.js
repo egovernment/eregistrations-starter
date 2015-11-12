@@ -1,6 +1,6 @@
 'use strict';
 
-var db = require('mano').db
+var db            = require('mano').db
   , camelToHyphen = require('es5-ext/string/#/camel-to-hyphen');
 
 var standardRolesMap = {
@@ -18,14 +18,14 @@ module.exports = function (req) {
 			businessProcess = user.currentBusinessProcess;
 			if (!businessProcess) {
 				req.$appName = 'user';
+			} else {
+				if (!businessProcess.isAtDraft) {
+					req.$appName = 'business-process-submitted';
+				} else { //jslint: ignore
+					// TODO: Update after business process app is added
+					// req.$appName = 'business-process-?';
+				}
 			}
-//			else {
-//				if (businessProcess.isApplicationRegistered) {
-//					req.$appName = 'business-process-submitted';
-//				} else {
-//					req.$appName = 'business-process-?'; // TODO: Update after business process app is added
-//				}
-//			}
 		} else if (standardRolesMap.hasOwnProperty(role)) {
 			req.$appName = camelToHyphen.call(role);
 		}
