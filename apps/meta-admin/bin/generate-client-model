@@ -13,7 +13,7 @@ var resolve  = require('path').resolve
   , generate = require('mano/scripts/generate-app-client-model')
   , env      = require('../../../env');
 
-mano.i18n = i18n((env.i18n === false) ? null : require('../../../i18n'));
+mano.i18n = i18n((env.i18n === false) ? null : require('../../../i18n-messages'));
 
 generate(require('../client/model'), resolve(__dirname, '../')).done();
 

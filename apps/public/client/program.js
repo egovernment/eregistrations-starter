@@ -29,7 +29,7 @@ window.db = mano.db;
 // i18n2
 var env = mano.env = require('../../../apps-common/client/env');
 mano.i18n = require('i18n2')(require('mano/client/utils/resolve-locale')(env,
-	require('../../../i18n')));
+	require('../../../i18n-messages')));
 
 // DB Model
 require('../../../db');

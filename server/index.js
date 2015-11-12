@@ -29,7 +29,7 @@ module.exports = function () {
 
 	// Expose i18n
 	// TODO: Provide i18n module and always refer it (never through mano.i18n)
-	mano.i18n = i18n((env.i18n === false) ? null : require('../i18n'));
+	mano.i18n = i18n((env.i18n === false) ? null : require('../i18n-messages'));
 
 	// Expose mailer
 	// TODO: provide resolution module (do not rely on mano)
