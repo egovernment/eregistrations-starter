@@ -4,6 +4,7 @@
 'use strict';
 
 module.exports = [
+	"apps/business-process-submitted",
 	"apps/meta-admin",
 	"apps/public",
 	"apps/user",
