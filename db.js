@@ -1,12 +1,12 @@
 'use strict';
 
-var db = require('mano').db
-  , _  = require('../_')
-  , d  = require('d');
+var Database = require('dbjs')
+  , _        = require('./i18n')
+  , d        = require('d');
+
+var db = module.exports = require('mano').db = new Database();
 
 db.locale = 'en';
-
-module.exports = db;
 
 Object.defineProperty(db.Base, 'chooseLabel', d(_("Choose:")));
 Object.defineProperties(db.Boolean, {
