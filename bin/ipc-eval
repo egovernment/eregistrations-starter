@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+'use strict';
+
+require('../env');
+
+require('eregistrations/script/ipc-eval')(process.argv[2]);

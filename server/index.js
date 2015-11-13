@@ -70,8 +70,6 @@ module.exports = function () {
 		debug('db indexes');
 		require('./db/indexes');
 
-		require('./ipc-injection');
-
 		debug('uploaded files converter');
 		require('eregistrations/server/on-upload');
 
@@ -116,6 +114,8 @@ module.exports = function () {
 		server.on('close', function () { throw new Error("Server closed!"); });
 		server.listen(port);
 
-		require('./debug-time');
+		require('eregistrations/server/ipc-messenger');
+
+		require('eregistrations/server/debug-time');
 	});
 };
