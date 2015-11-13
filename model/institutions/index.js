@@ -2,4 +2,4 @@
 
 'use strict';
 
-module.exports = require('eregistrations/model/institution')(require('../base'));
+module.exports = require('eregistrations/model/institution')(require('../../db'));

@@ -2,7 +2,7 @@
 
 'use strict';
 
-var db       = require('../../base')
+var db       = require('../../../db')
   , Cost     = require('eregistrations/model/cost')(db)
   , Currency = require('dbjs-ext/number/currency')(db) // TODO: Replace with currency of a system
 

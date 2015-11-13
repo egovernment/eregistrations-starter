@@ -3,7 +3,7 @@
 
 'use strict';
 
-var db          = require('./base')
+var db          = require('../db')
   , defineViews = require('eregistrations/model/views');
 
 module.exports = defineViews(db).defineProperties({

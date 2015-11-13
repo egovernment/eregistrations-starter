@@ -3,7 +3,7 @@
 'use strict';
 
 var _  = require('../../i18n')
-  , db = require('../base');
+  , db = require('../../db');
 
 module.exports = require('eregistrations/model/user')(db);
 
