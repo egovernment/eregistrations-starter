@@ -1,7 +1,7 @@
 'use strict';
 
 var isFalsy = require('eregistrations/utils/is-falsy')
-  , db      = require('mano').db;
+  , db      = require('../db');
 
 module.exports = db.BusinessProcess.instances
 	.filterByKey('isFromEregistrations', true)

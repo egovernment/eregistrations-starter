@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 'use strict';
-var mano       = require('mano')
-  , i18n       = require('i18n2')
+var i18n       = require('i18n2')
   , tryRequire = require('mano/lib/utils/try-require').bind(require)
   , resolve    = require('path').resolve
   , dbServer   = require('../server/db/persistent')

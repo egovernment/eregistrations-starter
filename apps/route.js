@@ -1,6 +1,6 @@
 'use strict';
 
-var db            = require('mano').db
+var db            = require('../db')
   , camelToHyphen = require('es5-ext/string/#/camel-to-hyphen');
 
 var standardRolesMap = {

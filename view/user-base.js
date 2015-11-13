@@ -3,7 +3,7 @@
 'use strict';
 
 var startsWith = require('es5-ext/string/#/starts-with')
-  , db         = require('mano').db;
+  , db         = require('../db');
 
 // Assure base customisations are loaded
 require('./base');

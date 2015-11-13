@@ -7,7 +7,6 @@ var copy              = require('es5-ext/object/copy')
   , path              = require('path')
   , debugLoad         = require('debug-ext')('load')
   , debug             = require('debug-ext')('start-service')
-  , i18n              = require('i18n2')
   , mano              = require('mano')
   , appsConf          = require('./apps/conf')
 
@@ -15,21 +14,17 @@ var copy              = require('es5-ext/object/copy')
   , root = resolve(__dirname, '..')
   , stdout   = process.stdout.write.bind(process.stdout);
 
+require('../db');
+require('../i18n');
+
 module.exports = function () {
 	var env = require('../env'), ssl, port, server;
 
-	// Expose env
-	// TODO: Always refer to env module (never through mano.env)
-	mano.env = env;
 	env.root = root;
 
 	// Expose uploads path
 	// TODO: either treat as hardcoded or provide resolution module
 	mano.uploadsPath = resolve(root, 'uploads');
-
-	// Expose i18n
-	// TODO: Provide i18n module and always refer it (never through mano.i18n)
-	mano.i18n = i18n((env.i18n === false) ? null : require('../i18n-messages'));
 
 	// Expose mailer
 	// TODO: provide resolution module (do not rely on mano)

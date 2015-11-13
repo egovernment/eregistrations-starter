@@ -26,9 +26,10 @@ var forEach           = require('es5-ext/object/for-each')
   , authentication    = require('mano-auth/server/authentication')
   , getPostRouter     = require('mano/server/post-router')
   , basePostRoutes    = require('mano/controller/server')
-  , archiver         = require('eregistrations/server/business-process-files-archiver')
-  , documentArchiver = require('eregistrations/server/business-process-document-files-archiver')
+  , archiver          = require('eregistrations/server/business-process-files-archiver')
+  , documentArchiver  = require('eregistrations/server/business-process-document-files-archiver')
   , appsRoute         = require('../apps/route')
+  , db                = require('../db')
   , appsConf          = require('./apps/conf')
   , appsList          = require('./apps/list')
   , appsControllers   = require('./apps/controllers')
@@ -36,8 +37,7 @@ var forEach           = require('es5-ext/object/for-each')
   , basename = path.basename, resolve = path.resolve
   , create = Object.create
 
-  , root = resolve(__dirname, '..'), db = mano.db
-  , uploadsDir = resolve(root, 'uploads');
+  , root = resolve(__dirname, '..'), uploadsDir = resolve(root, 'uploads');
 
 basePostRoutes.upload = dbjsFile(db, uploadsDir);
 
@@ -62,14 +62,14 @@ module.exports = function () {
 	app.use(uploadsMiddleware = st(uploadsDir, env, { cache: { fd: false } }));
 
 	// Serve and generate business process zip archives on demand
-	app.use(archiver.archiveServer(mano.db, {
+	app.use(archiver.archiveServer(db, {
 		uploadsPath: uploadsDir,
 		env: env,
 		stMiddleware: uploadsMiddleware
 	}));
 
 	// Serve and generate document zip archives on demand
-	app.use(documentArchiver.archiveServer(mano.db, {
+	app.use(documentArchiver.archiveServer(db, {
 		uploadsPath: uploadsDir,
 		env: env,
 		stMiddleware: uploadsMiddleware
