@@ -1,3 +1,5 @@
+// Initialisation of in-memory database engine used across process
+
 'use strict';
 
 var Database = require('dbjs')
