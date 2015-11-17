@@ -53,10 +53,10 @@ module.exports = function () {
 	app.use(compression());
 
 	// Serve system common static files
-	app.use(st(resolve(root, 'node_modules/eregistrations/public'), env));
-
-	// Serve eregistrations common static files
 	app.use(st(resolve(root, 'public'), env));
+
+	// Serve eRegistrations common static files
+	app.use(st(resolve(root, 'node_modules/eregistrations/public'), env));
 
 	// Serve static files from 'uploads' folder
 	app.use(uploadsMiddleware = st(uploadsDir, env, { cache: { fd: false } }));
