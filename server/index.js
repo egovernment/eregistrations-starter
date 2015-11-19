@@ -14,6 +14,7 @@ var copy              = require('es5-ext/object/copy')
   , root = resolve(__dirname, '..')
   , stdout   = process.stdout.write.bind(process.stdout);
 
+require('../env');
 require('../db');
 require('../i18n');
 
