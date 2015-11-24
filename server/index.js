@@ -75,6 +75,9 @@ module.exports = function () {
 		debug('notifications mailer');
 		require('eregistrations/server/notifications');
 
+		debug('isSubmitted locking trigger');
+		require('eregistrations/server/is-submitted-lock-trigger');
+
 		debug('db views populator');
 		require('./db/views');
 
