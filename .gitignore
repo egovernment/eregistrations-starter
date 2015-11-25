@@ -9,6 +9,7 @@ Thumbs.db
 /env.js
 /i18n-scan-map.generated.json
 /apps-common/client/env.json
+/apps-common/client/env.js
 /apps-common/client/legacy/generated
 /.idea
 /log
