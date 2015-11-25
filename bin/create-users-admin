@@ -6,6 +6,6 @@ require('../env');
 require('../i18n');
 
 require('../model/user/roles');
-require('dbjs-ext/string/string-line/password')(db);
+require('dbjs-ext/string/string-line/password')(require('mano').db);
 
 require('eregistrations/scripts/create-users-admin')(require('../server/db/persistent'));
