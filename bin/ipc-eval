@@ -4,4 +4,4 @@
 
 require('../env');
 
-require('eregistrations/script/ipc-eval')(process.argv[2]);
+require('eregistrations/scripts/ipc-eval')(process.argv[2]);
