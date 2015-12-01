@@ -8,6 +8,8 @@ var copy              = require('es5-ext/object/copy')
   , debugLoad         = require('debug-ext')('load')
   , debug             = require('debug-ext')('start-service')
   , mano              = require('mano')
+  , archiver          = require('eregistrations/server/business-process-files-archiver')
+  , documentArchiver  = require('eregistrations/server/business-process-document-files-archiver')
   , appsConf          = require('./apps/conf')
 
   , basename = path.basename, resolve = path.resolve
@@ -19,13 +21,13 @@ require('../db');
 require('../i18n');
 
 module.exports = function () {
-	var env = require('../env'), ssl, port, server;
+	var env = require('../env'), ssl, port, server, uploadsPath;
 
 	env.root = root;
 
 	// Expose uploads path
 	// TODO: either treat as hardcoded or provide resolution module
-	mano.uploadsPath = resolve(root, 'uploads');
+	mano.uploadsPath = uploadsPath = resolve(root, 'uploads');
 
 	// Expose mailer
 	// TODO: provide resolution module (do not rely on mano)
@@ -77,6 +79,11 @@ module.exports = function () {
 
 		debug('isSubmitted locking trigger');
 		require('eregistrations/server/is-submitted-lock-trigger');
+
+		debug('business process files zip archiver');
+		archiver.filenameResetService(mano.db, { uploadsPath: uploadsPath });
+		debug('document files zip archiver');
+		documentArchiver.filenameResetService(mano.db, { uploadsPath: uploadsPath });
 
 		debug('db views populator');
 		require('./db/views');
