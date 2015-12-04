@@ -28,7 +28,6 @@ var forEach           = require('es5-ext/object/for-each')
   , basePostRoutes    = require('mano/controller/server')
   , archiver          = require('eregistrations/server/business-process-files-archiver')
   , documentArchiver  = require('eregistrations/server/business-process-document-files-archiver')
-  , appsRoute         = require('../apps/route')
   , db                = require('../db')
   , appsConf          = require('./apps/conf')
   , appsList          = require('./apps/list')
@@ -114,7 +113,7 @@ module.exports = function () {
 	app.use(authentication.logoutMiddleware);
 
 	// Resolve app
-	app.use(appResolver(appsRoute));
+	app.use(appResolver);
 	app.use(appLegacySettings(appsConf));
 
 	// Parse GET Query and mime type
