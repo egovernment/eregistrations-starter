@@ -66,7 +66,7 @@ var getListBusinessProcessFragment = getPartFragments(db.BusinessProcess, bpList
 var getListComputedBusinessProcessFragment = getIndexedFragments(dbDriver, bpListComputedProps);
 
 var getVisitedBusinessProcessesFragment = function (userId, roleName) {
-	var list = db.User.getById(userId).visitedBusinessProcesses[roleName];
+	var list = db.User.getById(userId).recentlyVisited.businessProcesses[roleName];
 	limitObjectsList(list, applicableBusinessProcesses[roleName], {
 		preferred: preferredBusinessProcesses[roleName]
 	});
