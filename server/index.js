@@ -77,8 +77,11 @@ module.exports = function () {
 		debug('notifications mailer');
 		require('eregistrations/server/notifications');
 
-		debug('isSubmitted locking trigger');
-		require('eregistrations/server/is-submitted-lock-trigger')();
+		debug('isSentBack trigger');
+		require('eregistrations/server/sent-back-trigger')();
+
+		debug('sentBack reset trigger');
+		require('eregistrations/server/sent-back-reset-trigger')();
 
 		debug('business process files zip archiver');
 		archiver.filenameResetService(mano.db, { uploadsPath: uploadsPath });
