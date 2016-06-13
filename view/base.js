@@ -5,7 +5,7 @@ var _                = require('../i18n').bind('View')
 
 module.exports = exports = require('eregistrations/view/base');
 
-exports.title = _("CHANGE ME");
+exports.title = _("CHANGEME");
 
 exports.head = function () {
 	meta({ name: 'viewport', content: 'width=device-width' });
