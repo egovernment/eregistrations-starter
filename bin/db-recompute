@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+'use strict';
+
+Error.stackTraceLimit = Infinity;
+
+require('fs2/descriptors-handler')();
+require('eregistrations/server/utils/debug-conf');
+
+var resolve      = require('path').resolve
+  , initDriver   = require('eregistrations/server/utils/init-driver')
+  , recompute    = require('eregistrations/server/scripts/db-recompute')
+  , env          = require('../env')
+  , storageNames = require('../server/services/db/storage-names')
+
+  , root = resolve(__dirname, '..'), slavePath = resolve(__dirname, 'db-recompute-slave');
+
+// TODO: Load of model is needed only to get through index initialization without crashing.
+// When we optimise indexes initialization (e.g. split into model-dependant and independent)
+// this can be removed
+require('../i18n');
+require('../server/model');
+
+var driver = initDriver(root, storageNames, env.db);
+
+// TODO: Load just reduction indexes
+require('../server/db/indexes');
+
+require('eregistrations/server/business-process-data-forms-print').filenameResetService({
+	uploadsPath: resolve(root, 'uploads')
+});
+
+var computeManagerSizes = require('eregistrations/server/services/compute-manager-relations-sizes');
+
+computeManagerSizes(driver)(function () { return driver.onDrain; })(function () {
+	return recompute(driver, slavePath)(driver.close.bind(driver));
+}).done();

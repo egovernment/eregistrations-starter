@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+// WARNING: NOT MEANT TO BE RUN ON ITS OWN
+// This program is run internally by 'db-recompute' script
+
+'use strict';
+
+Error.stackTraceLimit = Infinity;
+
+var DbjsEvent = require('dbjs/_setup/event')
+  , recompute = require('eregistrations/server/scripts/db-recompute/slave');
+
+require('../env');
+require('../i18n');
+
+DbjsEvent.stampZeroMode = true;
+var db = require('../server/model');
+DbjsEvent.stampZeroMode = false;
+
+require('../server/services/business-process-flow');
+
+recompute({
+	database: db,
+	setupIndexes: function () {
+		require('../server/db/indexes');
+	}
+});
