@@ -15,12 +15,16 @@ Thumbs.db
 /log
 npm-debug.log
 
-/data/db
+/data-local
 /node_modules/dbjs-level
 /node_modules/dbjs-mongo
+/node_modules/level-party
 
 /node_modules/.bin
 /node_modules/bcrypt/build
+/node_modules/html-pdf/node_modules/phantomjs/lib/location.js
+/node_modules/html-pdf/node_modules/phantomjs/lib/phantom
+/node_modules/html-pdf/node_modules/phantomjs/tmp
 /node_modules/invalidatejs/node_modules/libxml-to-js/node_modules/libxmljs/build
 /node_modules/jsdom/node_modules/contextify/build
 /node_modules/mongodb/node_modules/bson/builderror.log
@@ -36,3 +40,4 @@ npm-debug.log
 /node_modules/zombie/node_modules/ws/node_modules/utf-8-validate/build
 
 /view/*/index.html
+/uploads
