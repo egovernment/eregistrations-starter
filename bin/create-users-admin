@@ -2,21 +2,24 @@
 
 'use strict';
 
-if (!process.env.DEBUG) process.env.DEBUG = '*';
+Error.stackTraceLimit = Infinity;
 
-require('../env');
+require('fs2/descriptors-handler')();
+require('eregistrations/server/utils/debug-conf');
+
+var env = require('../env');
 require('../i18n');
+var db = require('../db');
 
 require('../model/user/roles');
-require('dbjs-ext/string/string-line/password')(require('../db'));
+require('dbjs-ext/string/string-line/password')(db);
 
-var debug    = require('debug-ext')('load')
-  , dbDriver = require('../server/db/persistent')
-  , stdout   = process.stdout.write.bind(process.stdout);
+var resolve    = require('path').resolve
+  , initDriver = require('eregistrations/server/utils/init-driver')
+  , stdout     = process.stdout.write.bind(process.stdout);
 
-debug.open('db data');
-dbDriver.loadAll().on('progress', debug.progress).done(function (events) {
-	stdout(' [' + events.length + ' objects]');
-	debug.close();
-	require('eregistrations/scripts/create-users-admin')(dbDriver);
+var driver = initDriver(resolve(__dirname, '..'), ['user'], env.db, { database: db });
+
+driver.getStorage('user').loadAll().done(function (events) {
+	require('eregistrations/scripts/create-users-admin')(driver);
 });
