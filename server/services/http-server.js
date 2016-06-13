@@ -3,6 +3,7 @@
 'use strict';
 
 var forEach           = require('es5-ext/object/for-each')
+  , debug             = require('debug-ext')('client')
   , resolveModule     = require('cjs-module/resolve')
   , dbjsFile          = require('dbjs-file/server')
   , path              = require('path')
@@ -10,7 +11,7 @@ var forEach           = require('es5-ext/object/for-each')
   , cookies           = require('cookies').connect
   , connect           = require('connect')
   , compression       = require('compression')
-//  , serveFavicon      = require('serve-favicon')
+  // , serveFavicon      = require('serve-favicon')
   , mano              = require('mano')
   , appHtml           = require('mano/lib/server/server/app')
   , appResolver       = require('mano/lib/server/server/app-resolver')
@@ -20,28 +21,32 @@ var forEach           = require('es5-ext/object/for-each')
   , clientId          = require('mano/lib/server/server/client-id')
   , getRouter         = require('mano/lib/server/server/get')
   , post              = require('mano/lib/server/server/post')
+  , postCtrlHandler   = require('mano/lib/server/server/post-apps-controller-handler')
+  , postSlaveEmitter  = require('mano/lib/server/server/post-slave-emitter')
   , webmake           = require('mano/lib/server/server/webmake')
   , serverSentEvents  = require('mano/lib/server/server/server-sent-events')
   , st                = require('mano/lib/server/server/static')
   , authentication    = require('mano-auth/server/authentication')
-  , getPostRouter     = require('mano/server/post-router')
+  , getPostRouter     = require('mano/server/post-basic-router')
   , basePostRoutes    = require('mano/controller/server')
   , archiver          = require('eregistrations/server/business-process-files-archiver')
   , documentArchiver  = require('eregistrations/server/business-process-document-files-archiver')
-  , db                = require('../db')
-  , appsConf          = require('./apps/conf')
-  , appsList          = require('./apps/list')
-  , appsControllers   = require('./apps/controllers')
+  , dataFormPrinter   = require('eregistrations/server/business-process-data-forms-print')
+  , db                = require('../../db')
+  , appsConf          = require('../apps/conf')
+  , appsList          = require('../apps/list')
+  , appsControllers   = require('../processes/master/apps-post-controllers')
+  , queryMemoryDb     = require('../processes/master/query-memory-db')
 
   , basename = path.basename, resolve = path.resolve
-  , create = Object.create
+  , create = Object.create, stringify = JSON.stringify
 
-  , root = resolve(__dirname, '..'), uploadsDir = resolve(root, 'uploads');
+  , root = resolve(__dirname, '../..'), uploadsDir = resolve(root, 'uploads');
 
 basePostRoutes.upload = dbjsFile(db, uploadsDir);
 
 module.exports = function () {
-	var app = connect(), env = require('../env'), webmakeRoutes, cssRoutes, postRoutes = create(null)
+	var app = connect(), env = require('../../env'), webmakeRoutes, cssRoutes
 	  , appViewPaths = mano.appRoutes = create(null), uploadsMiddleware;
 
 	// Favicon
@@ -61,14 +66,22 @@ module.exports = function () {
 	app.use(uploadsMiddleware = st(uploadsDir, env, { cache: { fd: false } }));
 
 	// Serve and generate business process zip archives on demand
-	app.use(archiver.archiveServer(db, {
+	app.use(archiver.archiveServer({
+		uploadsPath: uploadsDir,
+		env: env,
+		stMiddleware: uploadsMiddleware
+	}));
+
+	// Generate and serve data-forms pdfs on demand
+	app.use(dataFormPrinter.printServer({
+		queryHandler: queryMemoryDb,
 		uploadsPath: uploadsDir,
 		env: env,
 		stMiddleware: uploadsMiddleware
 	}));
 
 	// Serve and generate document zip archives on demand
-	app.use(documentArchiver.archiveServer(db, {
+	app.use(documentArchiver.archiveServer(queryMemoryDb, {
 		uploadsPath: uploadsDir,
 		env: env,
 		stMiddleware: uploadsMiddleware
@@ -76,6 +89,13 @@ module.exports = function () {
 
 	// Parse cookies
 	app.use(cookies());
+
+	// Parse GET Query and mime type
+	app.use(function (req, res, next) {
+		req.query = req._parsedUrl.query ? parse(req._parsedUrl.query) : {};
+		req._mime = (req.headers['content-type'] || '').split(';')[0];
+		next();
+	});
 
 	// Resolve Client Id
 	app.use(clientId);
@@ -116,30 +136,34 @@ module.exports = function () {
 	app.use(appResolver);
 	app.use(appLegacySettings(appsConf));
 
-	// Parse GET Query and mime type
-	app.use(function (req, res, next) {
-		req.query = req._parsedUrl.query ? parse(req._parsedUrl.query) : {};
-		req._mime = (req.headers['content-type'] || '').split(';')[0];
-		next();
-	});
-
 	// Parse POST requests
 	app.use(bodyParser({
 		uploadDir: resolve(root, env.tmpFolder || 'tmp'),
 		limit: '100mb'
 	}));
 
-	// Process POST requests
+	// Handle POST requests
+	var postRoutes = create(null);
 	forEach(appsControllers, function (controllers, appPath) {
-		postRoutes[basename(appPath)] = getPostRouter(controllers, mano.legacyPool);
+		try {
+			postRoutes[basename(appPath)] = getPostRouter(controllers, mano.legacyPool);
+		} catch (e) {
+			console.error("Could not setup POST routes for " + stringify(appPath));
+			throw e;
+		}
 	});
-	app.use(post.bind(postRoutes));
+	app.use(post([
+		// Master POST requests
+		postCtrlHandler(postRoutes),
+		// Emit not met POST requests to slave process
+		postSlaveEmitter(mano.legacyPool)
+	]));
 
 	// Handle Server -> Client update stream
 	app.use(serverSentEvents);
 
 	// Process server-side app GET requests
-	app.use(getRouter(require('./apps/routers')));
+	app.use(getRouter(require('../apps/routers')));
 
 	// Process app GET requests (serve app HTML)
 	forEach(appsConf, function (conf, appPath) {
@@ -149,6 +173,12 @@ module.exports = function () {
 
 	// Stop process in case of unhandled error
 	app.use(function (err, req, res, next) {
+		if (err.status === 400) {
+			// Aborted request
+			debug("request aborted %s %s %s", req.$clientId, req.method, req.url);
+			return;
+		}
+		console.trace("Unhandled request error");
 		process.nextTick(function () { throw err; });
 	});
 
