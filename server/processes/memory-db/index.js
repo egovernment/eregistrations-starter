@@ -78,7 +78,7 @@ process.once('message', function (message) {
 	require('eregistrations/server/services/notifications');
 
 	debug('business-process flow handler');
-	require('eregistrations/server/services/business-process-flow');
+	require('../../services/business-process-flow');
 
 	debug('business process files zip archiver');
 	archiver.filenameResetService(mano.db, { uploadsPath: mano.uploadsPath });
