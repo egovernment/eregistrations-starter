@@ -1,7 +1,7 @@
 'use strict';
 
-var forEach             = require('es5-ext/object/for-each')
-  , db                         = require('../db')
+var forEach                    = require('es5-ext/object/for-each')
+  , db                         = require('../../db')
   , processingStepsMeta        = require('../../apps-common/processing-steps/meta')
   , BusinessProcessesSnapshots = db.Object.extend('BusinessProcessesSnapshots');
 
