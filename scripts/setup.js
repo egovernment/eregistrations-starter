@@ -6,8 +6,10 @@ var deferred                  = require('deferred')
   , generateAppsHtmlIndex     = require('mano/scripts/generate-apps-html-index')
   , generateAppsClientProgram = require('mano/scripts/generate-apps-client-program')
   , generateAppsClientCss     = require('mano/scripts/generate-apps-client-css')
+  , generateClientEnv         = require('eregistrations/scripts/generate-client-env')
+  , cloudfrontInvalidate      = require('eregistrations/server/scripts/cloudfront-invalidate')
+  , dbRecompute               = require('../server/scripts/db-recompute-in-sandbox')
   , i18nScan                  = require('./i18n-scan')
-  , generateClientEnv         = require('./generate-client-env')
   , env                       = require('../env')
   , appsList                  = require('../server/apps/list')
 
@@ -20,14 +22,18 @@ module.exports = function () {
 		// 1. Generate map of all i18n messages used in a system
 		i18nScan,
 		// 2. Generate client-side dedicated env.json
-		generateClientEnv,
+		generateClientEnv.bind(null, env, root),
 		// 3. Generate client-side fast model loading files
 		generateAppsClientModel.bind(null, root, appsList),
 		// 4. Generate client-side index.html entry files
 		generateAppsHtmlIndex.bind(null, root, appsList),
+		// 8. Ensure to have actual state of indexes
+		dbRecompute,
 		// 5. Generate CSS bundles (clide-side stylesheets)
 		!env.dev && generateAppsClientCss.bind(null, root, appsList),
 		// 6. Generate JS bundles (client-side programs)
-		!env.dev && generateAppsClientProgram.bind(null, root, appsList)
+		!env.dev && generateAppsClientProgram.bind(null, root, appsList),
+		// 11. Invalidate Cloudfront (if configured)
+		env.cloudfront && cloudfrontInvalidate.bind(null, root, appsList, env.cloudfront)
 	], function (ignore, next) { return next && next(); }, null);
 };
