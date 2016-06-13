@@ -4,4 +4,7 @@
 
 Error.stackTraceLimit = Infinity;
 
-require('../scripts/generate-client-env')().done();
+var root = require('path').resolve(__dirname, '..')
+  , env  = require('../env');
+
+require('eregistrations/scripts/generate-client-env')(env, root).done();
