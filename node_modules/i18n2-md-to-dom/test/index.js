@@ -67,7 +67,7 @@ module.exports = function (t, a) {
 		}
 	}), { inline: true });
 	a(result.nodeName, '#document-fragment');
-	a(result.childNodes.length, 4);
+	a(result.childNodes.length, 3);
 	a(result.childNodes[0].data, 'marko ');
 	a(result.childNodes[1].nodeName, 'STRONG');
 	a(result.childNodes[1].childNodes.length, 3);
@@ -75,9 +75,6 @@ module.exports = function (t, a) {
 	a(result.childNodes[1].childNodes[1].data, 'fura');
 	a(result.childNodes[1].childNodes[2].data, ' zegarek');
 	a(result.childNodes[2].data, ' zagalo ');
-	a(result.childNodes[3].nodeName, 'P');
-	a(result.childNodes[3].childNodes.length, 1);
-	a(result.childNodes[3].childNodes[0].data, 'razdwa');
 
 	result = md(_('# marko __marek ${ miszel } zegarek__ zagalo ${ fuszka }\n\n## filo', {
 		miszel: 'fura',

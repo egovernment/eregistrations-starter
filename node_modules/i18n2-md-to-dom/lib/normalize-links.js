@@ -14,7 +14,7 @@ exports = module.exports = function (dom) {
 		if (!isAnchor(child)) return exports(child);
 		href = child.getAttribute('href');
 		if (!href) return;
-		if (!isExternalLink(href) && !isFileLink(child.pathname)) return;
+		if (!isExternalLink(href) && !isFileLink(child.pathname || href)) return;
 		child.setAttribute('target', '_blank');
 	});
 };
