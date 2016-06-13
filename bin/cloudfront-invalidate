@@ -1,0 +1,15 @@
+#!/usr/bin/env node
+
+'use strict';
+
+Error.stackTraceLimit = Infinity;
+
+require('eregistrations/server/utils/debug-conf');
+
+var root     = require('path').resolve(__dirname, '..')
+  , appsList = require('../server/apps/list')
+  , env      = require('../env');
+
+if (!env.cloudfront) throw new Error("No cloudfront configuration provided in env.js");
+
+require('eregistrations/scripts/cloudfront-invalidate')(root, appsList, env.cloudfront).done();
