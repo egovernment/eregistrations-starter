@@ -4,10 +4,7 @@
 
 Error.stackTraceLimit = Infinity;
 
-if (!process.env.DEBUG) {
-	process.env.DEBUG = 'application-number,auth,clean-demo-users,client,client-bundle,db,' +
-		'db-data-sync,health,html-renderer,is-submitted-lock-trigger,load,start-service,zip-archiver';
+require('fs2/descriptors-handler')();
+require('eregistrations/server/utils/debug-conf');
 
-}
-
-require('../server')();
+require('../server/processes/master');
