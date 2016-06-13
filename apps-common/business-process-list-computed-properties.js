@@ -4,4 +4,7 @@
 
 var Set = require('es6-set');
 
-module.exports = new Set([]);
+module.exports = new Set([
+	'businessName',
+	'certificates/applicable'
+]);
