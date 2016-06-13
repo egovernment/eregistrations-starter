@@ -27,13 +27,13 @@ module.exports = function () {
 		generateAppsClientModel.bind(null, root, appsList),
 		// 4. Generate client-side index.html entry files
 		generateAppsHtmlIndex.bind(null, root, appsList),
-		// 8. Ensure to have actual state of indexes
+		// 5. Ensure to have actual state of indexes
 		dbRecompute,
-		// 5. Generate CSS bundles (clide-side stylesheets)
+		// 6. Generate CSS bundles (clide-side stylesheets)
 		!env.dev && generateAppsClientCss.bind(null, root, appsList),
-		// 6. Generate JS bundles (client-side programs)
+		// 7. Generate JS bundles (client-side programs)
 		!env.dev && generateAppsClientProgram.bind(null, root, appsList),
-		// 11. Invalidate Cloudfront (if configured)
+		// 8. Invalidate Cloudfront (if configured)
 		env.cloudfront && cloudfrontInvalidate.bind(null, root, appsList, env.cloudfront)
 	], function (ignore, next) { return next && next(); }, null);
 };
