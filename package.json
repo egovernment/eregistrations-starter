@@ -15,6 +15,7 @@
     "create-users-admin": "node bin/create-users-admin",
     "i18n-scan": "node node_modules/mano/bin/i18n-scan",
     "ci": "node bin/ci",
+    "db-recompute": "node bin/db-recompute",
     "lint": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js",
     "lint-ci": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --no-cache --no-stream",
     "lint-console": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-jslint-medikoo/index.js --watch",
