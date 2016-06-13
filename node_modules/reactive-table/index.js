@@ -1,6 +1,6 @@
 'use strict';
 
-var toArray          = require('es5-ext/array/to-array')
+var aFrom            = require('es5-ext/array/from')
   , assign           = require('es5-ext/object/assign')
   , pluck            = require('es5-ext/function/pluck')
   , d                = require('d')
@@ -31,16 +31,16 @@ var Table = module.exports = function (document, list, columns) {
 var renderRow = function (item) {
 	var el = this.makeElement;
 	return el('tr',
-		this.cellRenderers.map(function (render) {
+		this.cellRenderers.map(function (render, index) {
 			var cell = render(item);
-			return isTableCell(cell) ? cell : el('td', cell);
+			return isTableCell(cell) ? cell : el('td', { class: this.columnsConf[index].class }, cell);
 		}, this));
 };
 
 Object.defineProperties(Table.prototype, assign({
 	setup: d(function (columns) {
 		var el = this.makeElement;
-		columns = toArray(columns);
+		this.columnsConf = columns = aFrom(columns);
 		if (!columns.length) throw new TypeError("There must be at least one column");
 
 		// Table
@@ -50,7 +50,7 @@ Object.defineProperties(Table.prototype, assign({
 		if (columns.some(function (column) { return column.head != null; })) {
 			this.table.appendChild(this.head = el('thead', el('tr', columns.map(function (column) {
 				var cell = normalize.call(this.document, column.head);
-				return isTableCell(cell) ? cell : el('th', cell);
+				return isTableCell(cell) ? cell : el('th', { class: column.class }, cell);
 			}, this))));
 		}
 
