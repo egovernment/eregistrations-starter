@@ -1,10 +1,11 @@
 'use strict';
 
-var isReadOnlyRender = require('mano/client/utils/is-read-only-render');
+var _                = require('../i18n').bind('View')
+  , isReadOnlyRender = require('mano/client/utils/is-read-only-render');
 
 module.exports = exports = require('eregistrations/view/base');
 
-exports.title = "CHANGE ME";
+exports.title = _("CHANGE ME");
 
 exports.head = function () {
 	meta({ name: 'viewport', content: 'width=device-width' });
