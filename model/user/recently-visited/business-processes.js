@@ -8,8 +8,9 @@ var forEach             = require('es5-ext/object/for-each')
   , db                  = require('../../../db')
   , processingStepsMeta = require('../../../apps-common/processing-steps/meta');
 
-var recentlyVisited = module.exports =
-	require('eregistrations/model/user/recently-visited/business-processes')(db);
+module.exports = require('eregistrations/model/user/recently-visited/business-processes')(db);
+
+var recentlyVisited = db.User.prototype.recentlyVisited.businessProcesses;
 
 forEach(processingStepsMeta, function (meta, stepShortPath) {
 	var pathTokens = stepShortPath.split('/'), target = recentlyVisited, token;
