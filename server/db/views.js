@@ -60,4 +60,5 @@ module.exports = memoize(function (viewPath) {
 		return resolved;
 	}
 	console.error("\n\nUnrecognized view path " + stringify(viewPath) + "\n\n");
+	return resolved;
 }, { primitive: true });
