@@ -15,11 +15,10 @@ require('../model/user/roles');
 require('dbjs-ext/string/string-line/password')(db);
 
 var resolve    = require('path').resolve
-  , initDriver = require('eregistrations/server/utils/init-driver')
-  , stdout     = process.stdout.write.bind(process.stdout);
+  , initDriver = require('eregistrations/server/utils/init-driver');
 
 var driver = initDriver(resolve(__dirname, '..'), ['user'], env.db, { database: db });
 
-driver.getStorage('user').loadAll().done(function (events) {
+driver.loadAll().done(function (events) {
 	require('eregistrations/scripts/create-users-admin')(driver);
 });
