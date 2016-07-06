@@ -20,6 +20,10 @@ var defineStatus = function (key) {
 };
 
 forEach(processingStepsMeta, function (meta, stepShortPath) {
-	BusinessProcessesSnapshots.prototype.define(stepShortPath, { type: db.Object, nested: true });
-	Object.keys(meta).forEach(defineStatus, BusinessProcessesSnapshots.prototype[stepShortPath]);
+	var pathTokens = stepShortPath.split('/'), target = BusinessProcessesSnapshots.prototype;
+	do {
+		if (!target[pathTokens[0]]) target.define(pathTokens[0], { type: db.Object, nested: true });
+		target = target[pathTokens.shift()];
+	} while (pathTokens.length);
+	Object.keys(meta).forEach(defineStatus, target);
 });
