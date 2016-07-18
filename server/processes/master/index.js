@@ -57,6 +57,10 @@ dbService().done(function () {
 	debug('manager relations sizes computer');
 	require('eregistrations/server/services/compute-manager-relations-sizes')(driver).done();
 
+	debug('compute processing times');
+	require('eregistrations/server/services/compute-processing-time')(driver,
+		require('../../../apps-common/processing-steps/meta'));
+
 	// Configure & start server
 	if (isNaN(env.port)) port = 80;
 	else port = Number(env.port);
