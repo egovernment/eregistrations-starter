@@ -5,7 +5,6 @@
 var forEach           = require('es5-ext/object/for-each')
   , debug             = require('debug-ext')('client')
   , resolveModule     = require('cjs-module/resolve')
-  , dbjsFile          = require('dbjs-file/server')
   , path              = require('path')
   , parse             = require('querystring').parse
   , cookies           = require('cookies').connect
@@ -28,11 +27,9 @@ var forEach           = require('es5-ext/object/for-each')
   , st                = require('mano/lib/server/server/static')
   , authentication    = require('mano-auth/server/authentication')
   , getPostRouter     = require('mano/server/post-basic-router')
-  , basePostRoutes    = require('mano/controller/server')
   , archiver          = require('eregistrations/server/business-process-files-archiver')
   , documentArchiver  = require('eregistrations/server/business-process-document-files-archiver')
   , dataFormPrinter   = require('eregistrations/server/business-process-data-forms-print')
-  , db                = require('../../db')
   , appsConf          = require('../apps/conf')
   , appsList          = require('../apps/list')
   , appsControllers   = require('../processes/master/apps-post-controllers')
@@ -42,8 +39,6 @@ var forEach           = require('es5-ext/object/for-each')
   , create = Object.create, stringify = JSON.stringify
 
   , root = resolve(__dirname, '../..'), uploadsDir = resolve(root, 'uploads');
-
-basePostRoutes.upload = dbjsFile(db, uploadsDir);
 
 module.exports = function () {
 	var app = connect(), env = require('../../env'), webmakeRoutes, cssRoutes

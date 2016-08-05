@@ -46,7 +46,8 @@ DbjsEvent.stampZeroMode = false;
 dbService();
 
 var dbjsFile = require('dbjs-file/server')
-  , uploadsHandler = dbjsFile(mano.db, uploadsDir)
+  , uploadsHandler = dbjsFile(mano.db, uploadsDir,
+		require('eregistrations/server/utils/filename-resolve'))
   , appsControllers = require('./apps-post-controllers')
   , getPostRouter   = require('mano/server/post-slave-router');
 
