@@ -95,6 +95,9 @@ process.once('message', function (message) {
 	});
 	postListener(postRoutes);
 
+	debug('certificates status log writer');
+	require('eregistrations/server/services/certificates-status-log')(db);
+
 	require('eregistrations/server/services/ipc-messenger');
 
 	require('eregistrations/server/services/debug-time')('memory-db');
