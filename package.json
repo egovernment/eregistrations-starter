@@ -1,7 +1,6 @@
 {
   "name": "eregistrations-CHANGEME",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.0",
   "description": "eRegistrations for CHANGEME",
   "author": "UNCTAD team",
   "repository": {
@@ -25,5 +24,6 @@
     "css-lint-ci": "node node_modules/xlint/bin/xlint --linter=node_modules/xlint-csslint-next/index.js --fileExt=css --no-cache --no-stream",
     "ensure-eol": "node node_modules/mano/bin/ensure-eol",
     "ensure-valid-filenames": "node node_modules/mano/bin/ensure-valid-filenames"
-  }
+  },
+  "license": "MIT"
 }
