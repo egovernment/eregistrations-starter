@@ -1,4 +1,7 @@
 # eRegistrations Starter
+
+__Warning: This project is updated on-demand basis. If you want to setup new eRegistrations system, please contact project authors to confirm whether its codebase up to date and safe for initialization of new systems__
+
 ### To initialize new system proceed with following steps:
 
 - Clone this repository into folder where you wish to develop new system
