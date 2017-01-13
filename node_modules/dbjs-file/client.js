@@ -15,7 +15,11 @@ module.exports = function (db, FormData, XMLHttpRequest, File, url) {
 		validateCreate.call(this);
 		if (!file.name) this.prototype._validateSet_('name', file.name);
 		if (!db.File.accept.has(file.type)) {
-			throw customError("Unsupported file type", 'UNSUPPORTED_FILE_TYPE');
+			// Workaround for Firefox bug that's kept for generations to come:
+			// https://bugzilla.mozilla.org/show_bug.cgi?id=373621#c69
+			if ((file.type !== 'application/x-download') || !db.File.accept.has('application/pdf')) {
+				throw customError("Unsupported file type", 'UNSUPPORTED_FILE_TYPE');
+			}
 		}
 		return [file];
 	}));
