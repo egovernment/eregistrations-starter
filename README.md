@@ -12,6 +12,7 @@
 - Replace dummy system logo with right one at `public/img/logo.png` _(if you don't have logo yet, this step can be done later)_
 - Provide system favicon.ico at `public/favicon.ico` and uncomment corresponding line at `server/http-server-app.js` _(if you don't have favicon yet, this step can be done later)_
 - Replace content of this `README.md` document with system specific information
+- Update LICENSE for the project (if MIT one is not intended)
 - Initialize repository for the new system, and push initial state to Github
 
 Before you start the system, you need to provide environment settings (`env.js`) first, they can be as minimal as below:
