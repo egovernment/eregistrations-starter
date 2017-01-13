@@ -1,7 +1,6 @@
 'use strict';
 
 var d                 = require('d')
-  , nextTick          = require('next-tick')
   , isObservableValue = require('observable-value/is-observable-value')
 
   , defineProperties = Object.defineProperties
@@ -48,6 +47,8 @@ module.exports = function (observable) {
 		toDOMAttr: d(toDOMAttr),
 		value: d.gs(getValue, setValue)
 	});
-	nextTick(onNextTick.bind(observable));
+	// Naturally we should use `nextTick`, still it appears as "too fast" in firefox
+	// (some DOM rendering is split among event loops)
+	setTimeout(onNextTick.bind(observable), 0);
 	return observable;
 };
