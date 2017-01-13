@@ -1,6 +1,6 @@
 # eRegistrations Starter
 
-__Warning: This project is updated on-demand basis. If you want to setup new eRegistrations system, please contact project authors to confirm whether its codebase us up to date and safe for initialization of new a system__
+__Warning: This project is updated on-demand basis. If you want to setup new eRegistrations system, please contact project authors to confirm whether its codebase us up to date and safe for initialization of a new system__
 
 For more information about eRegistrations project see [help.eregistrations.org](http://help.eregistrations.org/)
 
