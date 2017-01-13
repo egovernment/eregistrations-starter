@@ -2,6 +2,8 @@
 
 __Warning: This project is updated on-demand basis. If you want to setup new eRegistrations system, please contact project authors to confirm whether its codebase us up to date and safe for initialization of new a system__
 
+For more information about eRegistrations project see [help.eregistrations.org](http://help.eregistrations.org/)
+
 ### To initialize new system proceed with following steps:
 
 - Clone this repository into folder where you wish to develop new system
