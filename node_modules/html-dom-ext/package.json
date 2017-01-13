@@ -13,14 +13,14 @@
     "url": "git://github.com/medikoo/html-dom-ext.git"
   },
   "dependencies": {
-    "es5-ext": "^0.10.7",
+    "es5-ext": "^0.10.12",
     "dom-ext": "0.0.3",
-    "memoizee": "^0.3.8",
+    "memoizee": "^0.4.1",
     "url3": "1"
   },
   "devDependencies": {
-    "jsdom": "^3.1.2",
-    "tad": "^0.2.3",
+    "jsdom": "^9.9.1",
+    "tad": "^0.2.7",
     "xlint": "^0.2.2",
     "xlint-jslint-medikoo": "^0.1.4"
   },

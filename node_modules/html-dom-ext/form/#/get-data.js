@@ -1,21 +1,26 @@
 'use strict';
 
-var toArray  = require('es5-ext/array/from')
-  , htmlForm = require('dom-ext/html-form-element/valid-html-form-element')
+var toArray             = require('es5-ext/array/from')
+  , htmlForm            = require('dom-ext/html-form-element/valid-html-form-element')
+  , ensureSubmitControl = require('../../submit-control/ensure')
 
   , isArray = Array.isArray, forEach = Array.prototype.forEach
   , push = Array.prototype.push;
 
-module.exports = function () {
-	var data = {};
+module.exports = function (/* options */) {
+	var data = {}, options = Object(arguments[0]), submitControl;
+	if (options.submitControl) {
+		submitControl = ensureSubmitControl(options.submitControl);
+		if (!submitControl.name) submitControl = null;
+	}
 	forEach.call(htmlForm(this).elements, function (control) {
 		var name, type, nodeName, value;
 		if (control.disabled) return;
 		nodeName = control.nodeName.toLowerCase();
 		if (nodeName === 'fieldset') return;
-		if (nodeName === 'button') return;
 
 		value = control.value;
+		if ((nodeName === 'button') && (control !== submitControl)) return;
 		if (nodeName === 'select') {
 			if (control.multiple) {
 				value = [];
@@ -26,12 +31,9 @@ module.exports = function () {
 			}
 		} else if (nodeName === 'input') {
 			type = control.getAttribute('type') || 'text';
-			if ((type === 'submit') || (type === 'image') || (type === 'reset') || (type === 'button')) {
-				return;
-			}
-			if (((type === 'radio') || (type === 'checkbox')) && !control.checked) {
-				return;
-			}
+			if (((type === 'submit') || (type === 'image')) && (control !== submitControl)) return;
+			if ((type === 'reset') || (type === 'button')) return;
+			if (((type === 'radio') || (type === 'checkbox')) && !control.checked) return;
 			if (type === 'file') {
 				value = toArray(control.files);
 				if (!value.length) return;
